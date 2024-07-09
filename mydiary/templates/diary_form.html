@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Mydiary
+{% endblock  %}
+
+{% block content %}
+    <h1 class="text-center text-white mt-4">Welcome to the Tarun's Project World</h1>
+
+    <h2>
+        {% if form.instance.pk %}
+        Edit Diary
+        {% else  %}
+        Create Diary
+        {% endif %}
+        <form method="post" enctype="multipart/form-data" class="form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-warning" type="submit">Submit</button>
+            <a href="{% url 'diary_list' %}">Back to Diaries List</a>
+        </form>
+    </h2>
+{% endblock  %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Mydiary
+{% endblock  %}
+
+{% block content %}
+    
+    <h1 class="text-center text-white mt-4">Welcome to the Tarun's Project World</h1>
+
+    <a class="btn btn-primary" href="{% url 'diary_create' %}">Create Diary</a>
+
+    <div class="container row gap-3">
+        {% for diary in diaries %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{diary.photo.url}}" alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{diary.user.username}}</h5>
+                <p class="card-text">{{diary.text}}</p>
+                {% if diary.user == user %}
+                <a href="{% url 'diary_edit' diary.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'diary_delete' diary.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock  %}
